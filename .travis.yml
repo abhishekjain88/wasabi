@@ -6,6 +6,9 @@ addons:
 jdk:
   - oraclejdk8
 install: mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+sudo: required
+services:
+  - docker
 cache:
   directories:
     - "~/.m2/repository"
@@ -16,6 +19,7 @@ branches:
     - master
 after_success:
   - mvn clean test jacoco:report coveralls:report
+  - "./bin/wasabi.sh start test stop"
   - "./.travis/before-deploy.sh"
   - "./.travis/deploy.sh"
 env:
@@ -26,4 +30,4 @@ env:
     - secure: XF4+X/6C3Y8b0n989cJs/hjG402HW7onNC0yQ9u2EI2/rtR1u3m9xUyYp/Oi9H6pV2pV9dFpHSOEPqrICslZWYWuha5b+uKr4O7oXDz0+8QnFmeBgOvcMk3JIAQYoObEImK+QFoZi5bvGqUTANEEkcwd6zCmtR0FogM7tU7jRXmL4f55262gAg0ZwsrrrHJaexgq4pB3qkjhDrpbiCxGEMNrgp66Clt8mn6YGKIJ0reNCRpWuNE+e611GVNc4GLL6Rt3xgLU0hLjVgQYWp27HZeA66xJsXa/VDLb/jjOk1CFjL/3QJDruv/SF6QGtR+Y/4iiimGsBww1A6tconS5U095Y9fr15yoZGHlSazyhFaYLSdMeZ69mbPuLZSc16JgGJKmvqNcPG2W92a/fwioUV2H/jpwl0FdgusbDQZNx/rBCbNI2KMk/HyPLfDkxrN8EEz/i1Z1mZY691hfxcPJ9m/VWpgtDDpcpLaSW3AWmK1SzZW1jOJjeUYFhmidd5fYJKmeBLP3kalfjjgAiHeu1K0R69wARD8/D2MBtDtmjEizqA5NADiCDZghUS9j0uxXrg+sdUOL5HgMWt3DY3KXn/sQBc3ksDXAhJL4+4L/JKCe0VJAZd1Zpk14Hji0tam/LnAQhu8spcXvTVViDtJbOSqignqq3DwSEJl5IzWgzxc=
 notifications:
   email:
-    - wasabi.honeybadger@gmail.com
+    - abhi111jain@gmail.com
